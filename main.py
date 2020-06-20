@@ -16,6 +16,7 @@ from helpers import get_device, rotate_img, one_hot_embedding
 from data import dataloaders, digit_one
 from train import train_model
 from test import rotating_image_classification, test_single_image
+from test import zoom_image_classification, test_plt_saving
 from losses import edl_mse_loss, edl_digamma_loss, edl_log_loss, relu_evidence
 from lenet import LeNet
 
@@ -146,6 +147,13 @@ def main():
         img = Image.open("./data/one.jpg").convert('L')
 
         test_single_image(model, img, uncertainty=use_uncertainty)
+        
+        filename = "./results/zoom_uncertainty_mse.jpg"
+        zoom_image_classification(
+            model, digit_one, filename, uncertainty=use_uncertainty)
+
+        test_plt_saving()
+
 
 
 if __name__ == "__main__":
