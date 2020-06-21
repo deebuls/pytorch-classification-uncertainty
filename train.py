@@ -39,9 +39,15 @@ def train_model(model, dataloaders, num_classes, criterion, optimizer, scheduler
             correct = 0
 
             # Iterate over data.
-            for i, (inputs, labels) in enumerate(dataloaders[phase]):
+            for i, (inputs, targets) in enumerate(dataloaders[phase]):
+            #for i in range(len(dataloaders[phase])):
+                #inputs, targets = dataloaders[phase][i]
 
+
+                labels, scale = targets
+                print(labels[0])
                 inputs = inputs.to(device)
+
                 labels = labels.to(device)
 
                 # zero the parameter gradients
@@ -53,11 +59,13 @@ def train_model(model, dataloaders, num_classes, criterion, optimizer, scheduler
 
                     if uncertainty:
                         y = one_hot_embedding(labels, num_classes)
+                        
                         y = y.to(device)
                         outputs = model(inputs)
                         _, preds = torch.max(outputs, 1)
                         loss = criterion(
                             outputs, y.float(), epoch, num_classes, 10, device)
+                        #print (loss.item())
 
                         match = torch.reshape(torch.eq(
                             preds, labels).float(), (-1, 1))

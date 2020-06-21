@@ -51,12 +51,13 @@ def main():
     if args.examples:
         examples = enumerate(dataloaders["val"])
         batch_idx, (example_data, example_targets) = next(examples)
+        
         fig = plt.figure()
         for i in range(6):
             plt.subplot(2, 3, i+1)
             plt.tight_layout()
             plt.imshow(example_data[i][0], cmap="gray", interpolation="none")
-            plt.title("Ground Truth: {}".format(example_targets[i]))
+            plt.title("Ground Truth: {}".format(example_targets[0][i]))
             plt.xticks([])
             plt.yticks([])
         plt.savefig("./images/examples.jpg")
@@ -162,7 +163,7 @@ def main():
         for i, tensor_img in enumerate([digit_zero, digit_one, digit_two, 
                                         digit_three, digit_four, digit_five,
                                         digit_six, digit_seven, digit_eight, digit_nine]):
-            filename = "./results/resnet_zoom_uncertainty_mse_affine_"+str(i)+".jpg"
+            filename = "./results/loss_resnet_zoom_uncertainty_mse_affine_"+str(i)+".jpg"
             zoom_image_classification(
                 model, tensor_img, filename, uncertainty=use_uncertainty)
         
