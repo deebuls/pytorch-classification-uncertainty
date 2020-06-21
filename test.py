@@ -159,15 +159,6 @@ def rotating_image_classification(model, img, filename, uncertainty=False, thres
     #plt.savefig("./results/rotate_uncertatinty.jpg")
     plt.savefig(filename)
 
-def test_plt_saving():
-    #fig, ax = plt.subplots(nrows=1, ncols=1)
-    fig = plt.figure(figsize=[6.2, 5])
-    fig, axs = plt.subplots(3, gridspec_kw={"height_ratios": [4, 1, 12]})
-
-    axs[0].plot(np.linspace(0, 1), np.log(np.linspace(0,1)))
-    fig.tight_layout()
-    fig.savefig("./results/test.jpg")
-
 def zoom_image_classification(model, img, filename, uncertainty=False, threshold=0.2, device=None):
     if not device:
         device = get_device()
@@ -231,8 +222,8 @@ def zoom_image_classification(model, img, filename, uncertainty=False, threshold
     c = ["blue", "red", "brown", "purple", "cyan"]
     marker = ["s", "^", "o"]*2
     labels = labels.tolist()
-    fig = plt.figure(figsize=[5, 5])
-    fig, axs = plt.subplots(3, gridspec_kw={"height_ratios": [4, 1, 12]})
+    fig = plt.figure(figsize=[6, 5])
+    fig, axs = plt.subplots(3, gridspec_kw={"height_ratios": [5, 1, 12]})
 
     for i in range(len(labels)):
         axs[2].plot(ldeg, lp[:, i], marker=marker[i], c=c[i])
@@ -254,9 +245,9 @@ def zoom_image_classification(model, img, filename, uncertainty=False, threshold
     axs[1].axis("off")
 
     axs[2].legend(labels)
-    axs[2].set_xlim([5, 28])
+    axs[2].set_xlim([8, 28])
     axs[2].set_ylim([0, 1])
-    axs[2].set_xlabel("Rotation Degree")
+    axs[2].set_xlabel("Zoom pixels")
     axs[2].set_ylabel("Classification Probability")
     #fig.show()
     fig.savefig(filename)

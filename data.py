@@ -26,16 +26,15 @@ dataloaders = {
     "val": dataloader_val,
 }
 
-
-digit_zero, _ = data_val[7]
-digit_one, _ = data_val[8]
+digit_zero, _ = data_val[3]
+digit_one, _ = data_val[2]
 digit_two, _ = data_val[1]
-digit_three, _ = data_val[2]
-digit_four, _ = data_val[3]
-digit_five, _ = data_val[4]
-digit_six, _ = data_val[5]
-data_seven, _ = data_va[0]
-digit_eight, _ = data_val[6]
+digit_three, _ = data_val[18]
+digit_four, _ = data_val[6]
+digit_five, _ = data_val[8]
+digit_six, _ = data_val[21]
+digit_seven, _ = data_val[0]
+digit_eight, _ = data_val[110]
 digit_nine, _ = data_val[7]
 
 

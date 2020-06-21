@@ -17,7 +17,7 @@ from data import dataloaders, digit_one
 from data import digit_zero, digit_one, digit_two, digit_three, digit_four, digit_five, digit_six, digit_seven, digit_eight, digit_nine
 from train import train_model
 from test import rotating_image_classification, test_single_image
-from test import zoom_image_classification, test_plt_saving
+from test import zoom_image_classification
 from losses import edl_mse_loss, edl_digamma_loss, edl_log_loss, relu_evidence
 from lenet import LeNet
 
