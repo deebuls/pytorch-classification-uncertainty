@@ -14,6 +14,7 @@ from PIL import Image
 
 from helpers import get_device, rotate_img, one_hot_embedding
 from data import dataloaders, digit_one
+from data import digit_zero, digit_one, digit_two, digit_three, digit_four, digit_five, digit_six, digit_seven, digit_eight, digit_nine
 from train import train_model
 from test import rotating_image_classification, test_single_image
 from test import zoom_image_classification, test_plt_saving
@@ -146,13 +147,15 @@ def main():
 
         img = Image.open("./data/one.jpg").convert('L')
 
-        test_single_image(model, img, uncertainty=use_uncertainty)
+        #test_single_image(model, img, uncertainty=use_uncertainty)
         
-        filename = "./results/zoom_uncertainty_mse.jpg"
-        zoom_image_classification(
-            model, digit_one, filename, uncertainty=use_uncertainty)
+        for i, tensor_img in enumerate([digit_zero, digit_one, digit_two, digit_three, digit_four, digit_five, digit_six, digit_seven, digit_eight, digit_nine]):
+            filename = "./results/zoom_uncertainty_mse_digit_"+str(i)+".jpg"
+            zoom_image_classification(
+                model, tensor_img, filename, uncertainty=use_uncertainty)
+        
 
-        test_plt_saving()
+        #test_plt_saving()
 
 
 

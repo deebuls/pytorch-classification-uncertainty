@@ -228,7 +228,7 @@ def zoom_image_classification(model, img, filename, uncertainty=False, threshold
        
     labels = np.arange(10)[scores[0].astype(bool)]
     lp = np.array(lp)[:, labels]
-    c = ["black", "blue", "red", "brown", "purple", "cyan"]
+    c = ["blue", "red", "brown", "purple", "cyan"]
     marker = ["s", "^", "o"]*2
     labels = labels.tolist()
     fig = plt.figure(figsize=[5, 5])
@@ -239,7 +239,7 @@ def zoom_image_classification(model, img, filename, uncertainty=False, threshold
 
     if uncertainty:
         labels += ["uncertainty"]
-        axs[2].plot(ldeg, lu, marker="<", c="red")
+        axs[2].plot(ldeg, lu, marker="<", c="black")
 
    
 
@@ -250,11 +250,11 @@ def zoom_image_classification(model, img, filename, uncertainty=False, threshold
 
     empty_lst = []
     empty_lst.append(classifications)
-    axs[1].table(cellText=empty_lst, bbox=[0, 1.2, 1, 1])
+    axs[1].table(cellText=empty_lst, bbox=[0, 1, 1, 1])
     axs[1].axis("off")
 
     axs[2].legend(labels)
-    axs[2].set_xlim([0, 28])
+    axs[2].set_xlim([5, 28])
     axs[2].set_ylim([0, 1])
     axs[2].set_xlabel("Rotation Degree")
     axs[2].set_ylabel("Classification Probability")
