@@ -7,6 +7,7 @@ data_train = MNIST("./data/mnist",
                    download=True,
                    train=True,
                    transform=transforms.Compose([
+                       transforms.RandomAffine(degrees=0,translate=(0.2,0.2),scale=(0.6,1.0)),
                        transforms.Resize((28, 28)),
                        transforms.ToTensor()]))
 
@@ -14,6 +15,7 @@ data_val = MNIST("./data/mnist",
                  train=False,
                  download=True,
                  transform=transforms.Compose([
+                     #transforms.RandomAffine(degrees=0,translate=(0.2,0.2),scale=(0.5,1.0)),
                      transforms.Resize((28, 28)),
                      transforms.ToTensor()]))
 

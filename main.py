@@ -4,6 +4,7 @@ import torch.optim as optim
 import torch.nn.functional as F
 from torchvision.datasets.mnist import MNIST
 import torchvision.transforms as transforms
+from torchvision.models.resnet import resnet18
 from torch.utils.data import DataLoader
 from torch.autograd import Variable
 
@@ -65,7 +66,11 @@ def main():
         use_uncertainty = args.uncertainty
         num_classes = 10
 
-        model = LeNet(dropout=args.dropout)
+        #model = LeNet(dropout=args.dropout)
+        model = resnet18(False, num_classes=10)
+        # Have ResNet model take in grayscale rather than RGB
+        model.conv1 = torch.nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3, bias=False)
+
 
         if use_uncertainty:
             if args.digamma:
@@ -117,7 +122,12 @@ def main():
 
         use_uncertainty = args.uncertainty
         device = get_device()
-        model = LeNet()
+        #model = LeNet()
+        #model = LeNet(dropout=args.dropout)
+        model = resnet18(False, num_classes=10)
+        # Have ResNet model take in grayscale rather than RGB
+        model.conv1 = torch.nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3, bias=False)
+
         model = model.to(device)
         optimizer = optim.Adam(model.parameters())
 
@@ -149,8 +159,10 @@ def main():
 
         #test_single_image(model, img, uncertainty=use_uncertainty)
         
-        for i, tensor_img in enumerate([digit_zero, digit_one, digit_two, digit_three, digit_four, digit_five, digit_six, digit_seven, digit_eight, digit_nine]):
-            filename = "./results/zoom_uncertainty_mse_digit_"+str(i)+".jpg"
+        for i, tensor_img in enumerate([digit_zero, digit_one, digit_two, 
+                                        digit_three, digit_four, digit_five,
+                                        digit_six, digit_seven, digit_eight, digit_nine]):
+            filename = "./results/resnet_zoom_uncertainty_mse_affine_"+str(i)+".jpg"
             zoom_image_classification(
                 model, tensor_img, filename, uncertainty=use_uncertainty)
         
